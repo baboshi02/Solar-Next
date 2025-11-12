@@ -1,4 +1,5 @@
-import { IExtendedSiginInForm } from "@/app/lib/interfaces";
+"use client";
+import { IExtendedSiginInForm } from "@/lib/interfaces";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -15,8 +16,14 @@ import {
 } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
 import Link from "next/link";
+import { useActionState } from "react";
+import { signinAction } from "@/app/actions";
 
-export function SignupForm({ action, ...props }: IExtendedSiginInForm) {
+export function SignupForm({ ...props }: IExtendedSiginInForm) {
+  const initialState = {
+    message: "",
+  };
+  const [state, action, pending] = useActionState(signinAction, initialState);
   return (
     <Card {...props}>
       <CardHeader>
@@ -73,8 +80,10 @@ export function SignupForm({ action, ...props }: IExtendedSiginInForm) {
             </Field>
             <FieldGroup>
               <Field>
-                <Button type="submit">Create Account</Button>
-                <Button variant="outline" type="button">
+                <Button disabled={pending} type="submit">
+                  Create Account
+                </Button>
+                <Button disabled={pending} variant="outline" type="button">
                   Sign up with Google
                 </Button>
                 <FieldDescription className="px-6 text-center">
@@ -84,6 +93,9 @@ export function SignupForm({ action, ...props }: IExtendedSiginInForm) {
             </FieldGroup>
           </FieldGroup>
         </form>
+        {state?.message && (
+          <p className="text-red-500 text-sm">{state.message}</p>
+        )}
       </CardContent>
     </Card>
   );

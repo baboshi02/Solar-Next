@@ -1,3 +1,4 @@
+"use client";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import {
@@ -10,9 +11,18 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import Link from "next/link";
-import { IExtendedLoginForm } from "@/app/lib/interfaces";
+import { IExtendedLoginForm } from "@/lib/interfaces";
+import { loginAction } from "@/app/actions";
+import { useActionState } from "react";
 
-export function LoginForm({ className, action, ...props }: IExtendedLoginForm) {
+const initialState = {
+  message: "",
+};
+export function LoginForm({ className, ...props }: IExtendedLoginForm) {
+  const [state, formAction, pending] = useActionState(
+    loginAction,
+    initialState,
+  );
   return (
     <div className={cn("flex flex-col gap-6", className)} {...props}>
       <Card>
@@ -23,7 +33,7 @@ export function LoginForm({ className, action, ...props }: IExtendedLoginForm) {
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <form action={action}>
+          <form action={formAction}>
             <div className="flex flex-col gap-6">
               <div className="grid gap-2">
                 <Label htmlFor="email">Email</Label>
@@ -47,7 +57,7 @@ export function LoginForm({ className, action, ...props }: IExtendedLoginForm) {
                 </div>
                 <Input id="password" name="password" type="password" required />
               </div>
-              <Button type="submit" className="w-full">
+              <Button disabled={pending} type="submit" className="w-full">
                 Login
               </Button>
               <Button variant="outline" className="w-full">
