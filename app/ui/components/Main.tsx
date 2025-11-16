@@ -1,15 +1,11 @@
 import Image from "next/image";
 import SolarImage1 from "@/public/Untitled.jpg";
+import HeroSection from "@/components/hero-section";
 const Main = () => {
   return (
     <main className="p-1.5 overflow-scroll">
       <h2>Faraday</h2>
-      <Image
-        src={SolarImage1}
-        alt="Solar Pannel Image"
-        width={500}
-        height={500}
-      />
+      <HeroSection />
       <div>
         The standard Lorem Ipsum passage, used since the 1500s "Lorem ipsum
         dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
