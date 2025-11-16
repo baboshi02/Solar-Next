@@ -9,9 +9,6 @@ const SideBar = () => {
       <li>items</li>
       <li>items</li>
       <li>items</li>
-      <Link className="mt-auto" href="/login">
-        Login
-      </Link>
     </div>
   );
 };

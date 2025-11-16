@@ -1,7 +1,9 @@
 "use server";
 
-import { connectDB } from "@/lib/mongodb";
-import { addUser, isUser } from "./db/services/User";
+import { connectDB } from "@/app/lib/mongodb";
+import { addUser, findUser, isUser } from "./db/services/User";
+import { redirect } from "next/navigation";
+import { createSession } from "@/app/lib/sessions";
 
 export const loginAction = async (prevState: any, loginData: FormData) => {
   try {
@@ -11,12 +13,16 @@ export const loginAction = async (prevState: any, loginData: FormData) => {
     if (!(email && password)) {
       throw new Error("No email or password");
     }
-    if (!(await isUser({ email, password }))) {
+    const user = await findUser({ email, password });
+    if (!user) {
       throw new Error("User Not Found");
     }
-  } catch (e) {
-    return { message: "There seems to be an error" };
+    await createSession(user.id);
+  } catch (error: any) {
+    console.error(error);
+    return { message: error?.message };
   }
+  redirect("/");
 };
 
 export const signinAction = async (precState: any, signInData: FormData) => {
@@ -34,8 +40,11 @@ export const signinAction = async (precState: any, signInData: FormData) => {
     if (await isUser({ username })) {
       throw new Error("username is already in use");
     }
-    console.log(await addUser({ username, email, password }));
+    const user = await addUser({ username, email, password });
+    await createSession(user.id);
+    redirect("/");
   } catch (error: any) {
+    console.error(error);
     return { message: error?.message };
   }
 };

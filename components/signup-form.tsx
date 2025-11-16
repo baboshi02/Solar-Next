@@ -1,5 +1,4 @@
 "use client";
-import { IExtendedSiginInForm } from "@/lib/interfaces";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -19,7 +18,7 @@ import Link from "next/link";
 import { useActionState } from "react";
 import { signinAction } from "@/app/actions";
 
-export function SignupForm({ ...props }: IExtendedSiginInForm) {
+export function SignupForm({ ...props }: React.ComponentProps<typeof Card>) {
   const initialState = {
     message: "",
   };

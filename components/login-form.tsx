@@ -11,14 +11,16 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import Link from "next/link";
-import { IExtendedLoginForm } from "@/lib/interfaces";
 import { loginAction } from "@/app/actions";
 import { useActionState } from "react";
 
 const initialState = {
   message: "",
 };
-export function LoginForm({ className, ...props }: IExtendedLoginForm) {
+export function LoginForm({
+  className,
+  ...props
+}: React.ComponentPropsWithRef<"div">) {
   const [state, formAction, pending] = useActionState(
     loginAction,
     initialState,
