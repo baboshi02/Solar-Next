@@ -8,10 +8,8 @@ import { useScroll, motion } from "motion/react";
 import { cn } from "@/lib/utils";
 
 const menuItems = [
-  { name: "Features", href: "#link" },
-  { name: "Solution", href: "#link" },
-  { name: "Pricing", href: "#link" },
-  { name: "About", href: "#link" },
+  { name: "Home", href: "/" },
+  { name: "Calculate", href: "/calculate" },
 ];
 
 export const HeroHeader = ({
@@ -52,14 +50,7 @@ export const HeroHeader = ({
             )}
           >
             <div className="flex w-full items-center justify-between gap-12 lg:w-auto">
-              <Link
-                href="/"
-                aria-label="home"
-                className="flex items-center space-x-2"
-              >
-                <Logo />
-              </Link>
-
+              <p className="text-blue-500">Faraday</p>
               <button
                 onClick={() => setMenuState(!menuState)}
                 aria-label={menuState == true ? "Close Menu" : "Open Menu"}
