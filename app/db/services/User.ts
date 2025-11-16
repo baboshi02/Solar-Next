@@ -1,3 +1,4 @@
+import { Query } from "mongoose";
 import UserInterface from "../interfaces/user";
 import UserModel from "../models/User";
 
@@ -12,4 +13,8 @@ export const addUser = async (data: UserInterface) => {
 
 export const findUser = async (data: Partial<UserInterface>) => {
   return await UserModel.findOne(data);
+};
+
+export const findById = async (id: string) => {
+  return await UserModel.findById(id);
 };

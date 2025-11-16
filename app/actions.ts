@@ -42,9 +42,9 @@ export const signinAction = async (precState: any, signInData: FormData) => {
     }
     const user = await addUser({ username, email, password });
     await createSession(user.id);
-    redirect("/");
   } catch (error: any) {
     console.error(error);
     return { message: error?.message };
   }
+  redirect("/");
 };
