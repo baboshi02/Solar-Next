@@ -11,7 +11,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import Link from "next/link";
-import { loginAction } from "@/app/actions";
+import { loginAction } from "@/app/lib/actions/action";
 import { useActionState } from "react";
 
 const initialState = {

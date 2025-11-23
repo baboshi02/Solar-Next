@@ -50,7 +50,9 @@ export const HeroHeader = ({
             )}
           >
             <div className="flex w-full items-center justify-between gap-12 lg:w-auto">
-              <p className="text-blue-500">Faraday</p>
+              <p className={cn("text-blue-500", scrolled && "text-black")}>
+                Faraday
+              </p>
               <button
                 onClick={() => setMenuState(!menuState)}
                 aria-label={menuState == true ? "Close Menu" : "Open Menu"}
@@ -66,7 +68,10 @@ export const HeroHeader = ({
                     <li key={index}>
                       <Link
                         href={item.href}
-                        className="text-muted-foreground hover:text-accent-foreground block duration-150"
+                        className={cn(
+                          "text-black  hover:text-accent-foreground block duration-150",
+                          scrolled && "text-muted-foreground",
+                        )}
                       >
                         <span>{item.name}</span>
                       </Link>
@@ -95,7 +100,7 @@ export const HeroHeader = ({
                 {isAuth ? (
                   <>
                     <p> {username}</p>
-                    <Button asChild variant="destructive" size="sm">
+                    <Button className={cn(scrolled && "hidden")}  asChild variant="destructive" size="sm">
                       <Link href={"/login"}>
                         <span>Logout</span>
                       </Link>

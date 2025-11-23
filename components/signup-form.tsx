@@ -1,5 +1,5 @@
 "use client";
-import { signinAction } from "@/app/lib/actions/actions";
+import { signinAction } from "@/app/lib/actions/action";
 import { Button } from "@/components/ui/button";
 import {
   Card,
